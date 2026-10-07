@@ -5,7 +5,7 @@ import Footer from "./components/layout/Footer";
 import { employees } from "./data/employee";
 import EmployeeCard from "./components/EmployeeCard";
 import { Card } from "./ui/card";
-import Searchbox from "./components/Searchbox";
+
 
 export default function App() {
   return (
@@ -14,7 +14,7 @@ export default function App() {
       <div className="">
         {/* <Sidebar /> */}
         <MainContent>
-          <Searchbox />
+         
           <div className="flex flex-col md:flex-row gap-2 justify-between">
             {employees.map((employee) => (
               <Card >
