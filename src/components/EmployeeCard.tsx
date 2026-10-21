@@ -1,5 +1,5 @@
+import { TableCell, TableRow } from "../ui/table";
 import type { Employee } from "../types/employee";
-
 
 interface EmployeeCardProps {
   employee: Employee;
@@ -9,13 +9,18 @@ export default function EmployeeCard({ employee }: EmployeeCardProps) {
   const { name, role, department, email } = employee;
 
   return (
-    <article className="m-4 p-2">
-      <h2 className="font-bold text-2xl">{name}</h2>
-      <p>{role}</p>
-      <p>{department}</p>
-      <a href={`mailto:${email}`}>
-        {email}
-      </a>
-    </article>
+    <TableRow>
+      <TableCell className="font-medium">{name}</TableCell>
+      <TableCell>{role}</TableCell>
+      <TableCell>{department}</TableCell>
+      <TableCell>
+        <a
+          className="text-primary underline-offset-4 hover:underline"
+          href={`mailto:${email}`}
+        >
+          {email}
+        </a>
+      </TableCell>
+    </TableRow>
   );
 }

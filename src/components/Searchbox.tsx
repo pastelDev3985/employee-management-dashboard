@@ -1,13 +1,25 @@
 import { Search } from "lucide-react";
+import { useState } from "react";
 
 function Searchbox() {
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(event.target.value);
+  }
   return (
-    <div className="flex items-center gap-2 relative">
-      <Search className="absolute text-gray-500 items-center ml-3 " />
+    <div className="relative w-full max-w-sm">
+      <Search
+        aria-hidden="true"
+        className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground"
+      />
       <input
         type="text"
         placeholder="Search employees..."
-        className="p-2 border  border-gray-300 rounded-full pl-10 w-full"
+        aria-label="Search employees"
+        className="h-10 w-full rounded-full border border-input bg-background px-4 pl-10 text-sm outline-none"
+        value={inputValue}
+        onChange={handleInputChange}
       />
     </div>
   );

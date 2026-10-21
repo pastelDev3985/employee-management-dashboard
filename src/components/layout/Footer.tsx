@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="bg-gray-100 text-center p-4 mt-2">
+    <footer className="border-t bg-muted/40 p-4 text-center text-sm text-muted-foreground">
       <p>© {new Date().getFullYear()} Employee Directory</p>
     </footer>
   );
