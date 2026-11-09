@@ -1,12 +1,11 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
 
-function Searchbox() {
-  const [inputValue, setInputValue] = useState('');
+interface SearchboxProps {
+  query: string;
+  onQueryChange: (query: string) => void;
+}
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(event.target.value);
-  }
+function Searchbox({ query, onQueryChange }: SearchboxProps) {
   return (
     <div className="relative w-full max-w-sm">
       <Search
@@ -18,8 +17,8 @@ function Searchbox() {
         placeholder="Search employees..."
         aria-label="Search employees"
         className="h-10 w-full rounded-full border border-input bg-background px-4 pl-10 text-sm outline-none"
-        value={inputValue}
-        onChange={handleInputChange}
+        value={query}
+        onChange={(e) => onQueryChange(e.target.value)}
       />
     </div>
   );

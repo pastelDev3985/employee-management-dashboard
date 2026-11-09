@@ -7,13 +7,21 @@ import type { Employee } from "./types/employee";
 import { employees as initialEmployees } from "./data/employee";
 import StatusFilter from "./components/StatusFilter";
 import { AddEmployee } from "./components/AddEmployee";
+import CardLoading from "./components/CardLoading";
 
 export default function App() {
   const [employees] = useState<Employee[]>(initialEmployees);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+
+  // Simulate loading state for demonstration purposes
+  setTimeout(() => {
+    setIsLoading(false);
+  }, 2000);
 
   return (
     <div className="flex min-h-screen flex-col">
-      <Header />
+      <Header query={searchQuery} onQueryChange={setSearchQuery} />
       <div className="flex-1">
         {/* <Sidebar /> */}
         <MainContent>
@@ -25,8 +33,16 @@ export default function App() {
             </div>
           ) : (
             <div>
-              <AddEmployee />
-              <StatusFilter />
+              {isLoading ? (
+                <div className="flex justify-center items-center h-screen">
+                  <CardLoading />
+                </div>
+              ) : (
+                <div className="flex flex-col gap-4">
+                  <AddEmployee />
+                  <StatusFilter searchQuery={searchQuery} />
+                </div>
+              )}
             </div>
           )}
         </MainContent>

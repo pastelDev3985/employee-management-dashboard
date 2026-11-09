@@ -11,14 +11,24 @@ import { useState } from "react";
 import EmployeeCard from "./EmployeeCard";
 import type { Employee } from "@/types/employee";
 
-export function StatusFilter() {
+interface StatusFilterProps {
+  searchQuery: string;
+}
+
+export function StatusFilter({ searchQuery }: StatusFilterProps) {
   const [statusFilter, setStatusFilter] = useState("all");
 
   const filteredRoles = employees.filter((employee) => {
-    if (statusFilter === "all") {
-      return true;
-    }
-    return employee.department === statusFilter;
+    const matchesDepartment =
+      statusFilter === "all" || employee.department === statusFilter;
+    const normalizedQuery = searchQuery.trim().toLowerCase();
+    const matchesSearch =
+      normalizedQuery.length === 0 ||
+      [employee.name, employee.role, employee.department, employee.email].some(
+        (value) => value.toLowerCase().includes(normalizedQuery),
+      );
+
+    return matchesDepartment && matchesSearch;
   });
 
   return (
@@ -54,9 +64,9 @@ export function StatusFilter() {
         </div>
       </div>
       <div className="flex justify-center mt-4">
-      <p className="text-sm text-muted-foreground">
-        Total employees: {filteredRoles.length}
-      </p>
+        <p className="text-sm text-muted-foreground">
+          Total employees: {filteredRoles.length}
+        </p>
       </div>
     </div>
   );
