@@ -25,5 +25,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": ["src", "src/ui/field.tsx", "src/ui/label.tsx", "src/ui/separator.tsx"]
 }

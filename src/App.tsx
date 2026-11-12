@@ -6,8 +6,8 @@ import { useState } from "react";
 import type { Employee } from "./types/employee";
 import { employees as initialEmployees } from "./data/employee";
 import StatusFilter from "./components/StatusFilter";
-import { AddEmployee } from "./components/AddEmployee";
 import CardLoading from "./components/CardLoading";
+import FieldCard from "./components/FieldCard";
 
 export default function App() {
   const [employees] = useState<Employee[]>(initialEmployees);
@@ -23,8 +23,10 @@ export default function App() {
     <div className="flex min-h-screen flex-col">
       <Header query={searchQuery} onQueryChange={setSearchQuery} />
       <div className="flex-1">
-        {/* <Sidebar /> */}
+      
         <MainContent>
+          <FieldCard />
+      
           {employees.length === 0 ? (
             <div className="w-full py-4 flex flex-col items-center justify-center">
               <p className="font-thin text-muted-foreground text-sm">
@@ -39,7 +41,6 @@ export default function App() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <AddEmployee />
                   <StatusFilter searchQuery={searchQuery} />
                 </div>
               )}

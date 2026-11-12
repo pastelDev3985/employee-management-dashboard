@@ -3,13 +3,14 @@ import type { Employee } from "../types/employee";
 
 interface EmployeeCardProps {
   employee: Employee;
+  onRowClick: () => void;
 }
 
-export default function EmployeeCard({ employee }: EmployeeCardProps) {
+export default function EmployeeCard({ employee, onRowClick }: EmployeeCardProps) {
   const { name, role, department, email } = employee;
 
   return (
-    <TableRow>
+    <TableRow onClick={onRowClick} className="cursor-pointer hover:bg-muted/50">
       <TableCell className="font-medium">{name}</TableCell>
       <TableCell>{role}</TableCell>
       <TableCell>{department}</TableCell>
