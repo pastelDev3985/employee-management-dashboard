@@ -10,7 +10,7 @@ import CardLoading from "./components/CardLoading";
 import FieldCard from "./components/FieldCard";
 
 export default function App() {
-  const [employees] = useState<Employee[]>(initialEmployees);
+  const [employees, setEmployees] = useState<Employee[]>(initialEmployees);
   const [isLoading, setIsLoading] = useState(true);
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -25,7 +25,11 @@ export default function App() {
       <div className="flex-1">
       
         <MainContent>
-          <FieldCard />
+          <FieldCard
+            onEmployeeCreated={(employee) =>
+              setEmployees((currentEmployees) => [...currentEmployees, employee])
+            }
+          />
       
           {employees.length === 0 ? (
             <div className="w-full py-4 flex flex-col items-center justify-center">
@@ -41,7 +45,10 @@ export default function App() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-4">
-                  <StatusFilter searchQuery={searchQuery} />
+                  <StatusFilter
+                    employees={employees}
+                    searchQuery={searchQuery}
+                  />
                 </div>
               )}
             </div>

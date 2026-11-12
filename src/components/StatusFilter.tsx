@@ -5,7 +5,6 @@ import {
   TableHeader,
   TableRow,
 } from "../ui/table";
-import { employees } from "../data/employee";
 import { Button } from "../ui/button";
 import { useState } from "react";
 import EmployeeCard from "./EmployeeCard";
@@ -19,10 +18,11 @@ import {
 } from "../ui/dialog";
 
 interface StatusFilterProps {
+  employees: Employee[];
   searchQuery: string;
 }
 
-export function StatusFilter({ searchQuery }: StatusFilterProps) {
+export function StatusFilter({ employees, searchQuery }: StatusFilterProps) {
   const [statusFilter, setStatusFilter] = useState("all");
   const [selectedUser, setSelectedUser] = useState<Employee | null>(null);
 
